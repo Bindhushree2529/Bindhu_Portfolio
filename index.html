@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bindhu Shree K B - Software Engineer & AI-ML Enthusiast</title>
+    <meta name="description" content="Bindhu Shree K B - Software Engineer specializing in AI/ML, web development, and Agile methodologies. View my projects, skills, and experience.">
+    <meta name="keywords" content="Software Engineer, AI, Machine Learning, Python, Web Development, Portfolio">
+    <meta name="author" content="Bindhu Shree K B">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        * { scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
+        
+        /* Loading Screen */
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .loader-hidden { opacity: 0; visibility: hidden; transition: opacity 0.5s, visibility 0.5s; }
+        
+        /* Scroll Progress */
+        .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #a855f7, #ec4899); z-index: 1000; transition: width 0.3s; }
+        
+        /* Animations */
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-spin { animation: spin 1s linear infinite; }
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out; }
+        .animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out; }
+        .animate-fadeInRight { animation: fadeInRight 0.8s ease-out; }
+        
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        
+        .hover-lift:hover { transform: translateY(-5px); transition: transform 0.3s ease; }
+        
+        /* Skills Progress Bars */
+        .skill-bar { width: 0%; transition: width 2s ease-in-out; }
+        .skill-bar.animate { width: var(--skill-width); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+    
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="text-center">
+            <div class="w-16 h-16 border-4 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-purple-300 text-lg">Loading Portfolio...</p>
+        </div>
+    </div>
+    
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Nav -->
+    <nav class="fixed w-full z-50 bg-slate-900/95 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">BKB</div>
+            <div class="flex items-center space-x-6">
+                <a href="#home" class="hover:text-purple-400">Home</a>
+                <a href="#about" class="hover:text-purple-400">About</a>
+                <a href="#education" class="hover:text-purple-400">Education</a>
+                <a href="#experience" class="hover:text-purple-400">Experience</a>
+                <a href="#projects" class="hover:text-purple-400">Projects</a>
+                <a href="#skills" class="hover:text-purple-400">Skills</a>
+                <a href="#certificates" class="hover:text-purple-400">Certificates</a>
+                <a href="#contact" class="hover:text-purple-400">Contact</a>
+                <a href="#" class="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded-lg transition-colors" onclick="downloadResume()">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20">
+        <div class="max-w-4xl text-center">
+            <div class="mb-8 flex justify-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full blur-lg opacity-50"></div>
+                    <img src="./profile.jpeg" 
+                         alt="Bindhu Shree" class="relative w-48 h-48 rounded-full object-cover border-4 border-purple-400 shadow-2xl"/>
+                </div>
+            </div>
+            
+            <h1 class="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Bindhu Shree K B
+            </h1>
+            <p class="text-2xl text-purple-300 mb-2">Software Engineer & AI-ML Enthusiast</p>
+            
+            <div class="flex justify-center space-x-6">
+                <a href="https://github.com/Bindhushree2529" class="hover:text-purple-400 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/bindhu-shree-kb/" class="hover:text-purple-400 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="mailto:sanihareddy25@gmail.com" class="hover:text-purple-400 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.749L12 10.855l9.615-7.034h.749c.904 0 1.636.732 1.636 1.636z"/></svg>
+                    <span>Email</span>
+                </a>
+                <a href="tel:6361207901" class="hover:text-purple-400 flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>Phone</span>
+                </a>
+            </div>
+            
+            <div class="mt-16 flex justify-center">
+                <a href="#about" class="animate-bounce bg-purple-500/20 rounded-full p-4 hover:bg-purple-500/30 transition-colors">
+                    <svg class="w-10 h-10 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent animate-fadeInUp">
+                About Me
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-slate-800/50 rounded-lg p-8 border border-purple-500/20 animate-fadeInLeft hover-lift">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-purple-300">Professional Summary</h3>
+                    </div>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Motivated and detail-oriented professional with strong expertise in software development and Agile-based delivery. Skilled in understanding business requirements, analyzing use cases, and translating them into clear technical documentation.
+                    </p>
+                </div>
+                <div class="space-y-6 animate-fadeInRight">
+                    <div class="bg-slate-800/50 rounded-lg p-6 border-l-4 border-purple-400 hover-lift animate-delay-200">
+                        <h4 class="text-lg font-semibold text-purple-300 mb-2">Core Strengths</h4>
+                        <p class="text-gray-300">Programming, databases, SDLC processes, and debugging expertise</p>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg p-6 border-l-4 border-pink-400 hover-lift animate-delay-400">
+                        <h4 class="text-lg font-semibold text-purple-300 mb-2">Development Focus</h4>
+                        <p class="text-gray-300">Testing, deploying application components with performance and reliability</p>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg p-6 border-l-4 border-purple-400 hover-lift animate-delay-400">
+                        <h4 class="text-lg font-semibold text-purple-300 mb-2">Team Collaboration</h4>
+                        <p class="text-gray-300">Cross-functional teamwork and delivering quality solutions within timelines</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-20 px-4 bg-slate-800/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent animate-fadeInUp">
+                Education
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-800/50 rounded-lg p-8 border border-purple-500/20 hover:border-purple-400/40 transition-colors animate-fadeInLeft hover-lift">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-purple-300">Bachelor's Degree</h3>
+                            <p class="text-gray-400 text-sm">Undergraduate</p>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-200 mb-2">B.Tech in Computer Science (AI ML)</h4>
+                    <p class="text-lg text-gray-300 mb-3">Presidency University</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">CGPA: 8.65</span>
+                        <span class="text-gray-400">May 2025</span>
+                    </div>
+                </div>
+                <div class="bg-slate-800/50 rounded-lg p-8 border border-pink-500/20 hover:border-pink-400/40 transition-colors animate-fadeInRight hover-lift">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-pink-300">Higher Secondary</h3>
+                            <p class="text-gray-400 text-sm">Pre-University</p>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-200 mb-2">12th Science</h4>
+                    <p class="text-lg text-gray-300 mb-3">Sri Vasavi PU College</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-pink-500/20 text-pink-300 px-3 py-1 rounded-full text-sm">89%</span>
+                        <span class="text-gray-400">2021</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-20 px-4 bg-slate-800/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Work Experience
+            </h2>
+            <div class="space-y-6">
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold text-purple-300">Software Engineer</h3>
+                    <p class="text-xl text-gray-300">Innercircle Softech • April 2025 – Present</p>
+                    <ul class="mt-4 space-y-2 text-gray-400">
+                        <li>▹ Analyzed requirements and contributed to the development and fine-tuning of machine learning components, ensuring accuracy, performance, and alignment with project objectives</li>
+                        <li>▹ Improved real-time data pipelines by identifying bottlenecks and implementing optimizations that enhanced processing speed and system responsiveness</li>
+                        <li>▹ Conducted thorough testing, debugging, and validation of models and associated components to ensure stable, reliable, and production-ready deployments</li>
+                        <li>▹ Prepared clear technical documentation covering workflows, testing results, model behavior, and implementation details to support maintainability and cross-team collaboration</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold text-purple-300">Web Development Intern</h3>
+                    <p class="text-xl text-gray-300">SimplifiedMinds • Jan 2025 – Mar 2025</p>
+                    <ul class="mt-4 space-y-2 text-gray-400">
+                        <li>▹ Developed responsive and user-friendly website pages using HTML, CSS, and JavaScript, ensuring consistent layout and cross-browser compatibility</li>
+                        <li>▹ Implemented an Email + OTP authentication workflow, gaining hands-on experience in user verification and basic access control mechanisms</li>
+                        <li>▹ Assisted in backend integration by connecting contact forms and login modules to server-side services, validating data flow, and troubleshooting errors</li>
+                        <li>▹ Collaborated with the team to identify and resolve backend issues such as missing data, incorrect values, and API response errors</li>
+                        <li>▹ Used Git for version control to manage code updates, track changes, and maintain clean and organized project repositories</li>
+                        <li>▹ Debugged UI issues including alignment problems, broken links, and slow-loading elements, ensuring a smooth and stable user experience after updates</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-2xl font-semibold text-purple-300">ML Engineer Intern</h3>
+                    <p class="text-xl text-gray-300">Moog Technologies • Jun 2024 – Jul 2024</p>
+                    <ul class="mt-4 space-y-2 text-gray-400">
+                        <li>▹ Supported the AI/ML team by preparing datasets, cleaning data, and running training scripts to ensure accurate and reliable model development</li>
+                        <li>▹ Monitored model behavior by reviewing logs, validating outputs, and identifying anomalies during training and inference</li>
+                        <li>▹ Troubleshot script failures, dependency issues, and input format errors using a structured step-by-step debugging approach</li>
+                        <li>▹ Improved model performance by tuning parameters, analyzing execution time, and verifying output quality</li>
+                        <li>▹ Enhanced data pipelines by testing data loading processes, identifying bottlenecks, and reporting issues for optimization</li>
+                        <li>▹ Used Git for version control to maintain clean code versions, track updates, and prevent conflicts across development workflows</li>
+                        <li>▹ Documented scripts, dataset references, environment setups, and workflow steps to support seamless team collaboration and handover</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Featured Projects
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-800/50 rounded-lg p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all hover:transform hover:scale-105">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M3,3H21V5H3V3M4,6H20V10H4V6M4,11H20V15H4V11M4,16H20V20H4V16Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-purple-300">ML & Real-Time Data</h3>
+                            <p class="text-gray-400 text-sm">Jun 2025 – Nov 2025</p>
+                        </div>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-200 mb-3">Forecasting Stock Prices with Machine Learning</h4>
+                    <ul class="text-gray-300 mb-4 space-y-2 text-sm">
+                        <li>• Built real-time stock dashboard using Streamlit with LSTM predictions</li>
+                        <li>• Handled API issues and improved system reliability</li>
+                        <li>• Added AI-based Q&A feature using LangChain and OpenAI</li>
+                        <li>• Optimized performance and maintained comprehensive documentation</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">LSTM</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Streamlit</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">LangChain</span>
+                    </div>
+                    <a href="https://github.com/Bindhushree2529" target="_blank" class="flex items-center text-purple-300 hover:text-purple-200 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        View Code
+                    </a>
+                </div>
+                
+                <div class="bg-slate-800/50 rounded-lg p-6 border border-pink-500/20 hover:border-pink-400/40 transition-all hover:transform hover:scale-105">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-pink-400 to-purple-400 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-pink-300">IoT & Automation</h3>
+                            <p class="text-gray-400 text-sm">Feb 2024 – May 2024</p>
+                        </div>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-200 mb-3">Smart Traffic Control using Raspberry Pi</h4>
+                    <ul class="text-gray-300 mb-4 space-y-2 text-sm">
+                        <li>• Developed automated traffic control with dynamic signal timing</li>
+                        <li>• Integrated sensors with Raspberry Pi GPIO pins</li>
+                        <li>• Simulated traffic scenarios and validated system accuracy</li>
+                        <li>• Created detailed documentation and wiring diagrams</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm">Raspberry Pi</span>
+                        <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm">IoT</span>
+                    </div>
+                    <a href="https://github.com/Bindhushree2529" target="_blank" class="flex items-center text-pink-300 hover:text-pink-200 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20 px-4 bg-slate-800/30">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Technical Skills
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-4">Programming & Scripting</h3>
+                    <p class="text-gray-300">Python • SQL • JavaScript (Basics)</p>
+                </div>
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-4">Operating Systems</h3>
+                    <p class="text-gray-300">Windows OS • Linux (Basics)</p>
+                </div>
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-4">Tools & Platforms</h3>
+                    <p class="text-gray-300">Git • GitHub • VS Code • Jupyter Notebook • Postman</p>
+                </div>
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-4">Software Development</h3>
+                    <p class="text-gray-300">SDLC Basics • Agile Methodology • Requirement Analysis • Debugging</p>
+                </div>
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-4">Web Technologies</h3>
+                    <p class="text-gray-300">HTML • CSS • JavaScript (Basic)</p>
+                </div>
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-300 mb-4">General Skills</h3>
+                    <p class="text-gray-300">Problem-Solving • Technical Troubleshooting • Documentation • Testing & Validation • Team Collaboration • Communication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates -->
+    <section id="certificates" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Certifications
+            </h2>
+            <div class="space-y-6">
+                <a href="https://www.skills.google/profile/badges" target="_blank" class="bg-slate-800/50 rounded-lg p-6 hover:bg-slate-700/50 transition-colors block">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-2">Generative AI from Google by L4G</h3>
+                    <p class="text-gray-400">Google</p>
+                </a>
+                <div class="bg-slate-800/50 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-2">Applied Artificial Intelligence</h3>
+                    <p class="text-gray-400">NPTEL</p>
+                </div>
+                <a href="https://www.udemy.com/certificate/UC-6eee5b8d-84b3-4ba8-896a-3dbcc4fcd052/" target="_blank" class="bg-slate-800/50 rounded-lg p-6 hover:bg-slate-700/50 transition-colors block">
+                    <h3 class="text-xl font-semibold text-purple-300 mb-2">Machine Learning and Data Science Projects</h3>
+                    <p class="text-gray-400">Udemy</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Let's Connect
+            </h2>
+            <p class="text-gray-300 mb-8">Open to discussing new opportunities and collaborations.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="mailto:sanihareddy25@gmail.com" class="bg-slate-800/50 rounded-lg p-6 hover:shadow-purple-500/20 flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.749L12 10.855l9.615-7.034h.749c.904 0 1.636.732 1.636 1.636z"/></svg>
+                    <span>sanihareddy25@gmail.com</span>
+                </a>
+                <a href="tel:6361207901" class="bg-slate-800/50 rounded-lg p-6 hover:shadow-purple-500/20 flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+91 6361207901</span>
+                </a>
+                <a href="https://www.linkedin.com/in/bindhu-shree-kb/" class="bg-slate-800/50 rounded-lg p-6 hover:shadow-purple-500/20 flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <span>LinkedIn Profile</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-20 px-4 bg-slate-800/30">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Send Message
+            </h2>
+            <form id="contactForm" class="bg-slate-800/50 rounded-lg p-8 space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="text" name="from_name" placeholder="Your Name" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none">
+                    <input type="email" name="from_email" placeholder="Your Email" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none">
+                </div>
+                <input type="text" name="subject" placeholder="Subject" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none">
+                <textarea name="message" placeholder="Your Message" rows="5" required class="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none resize-none"></textarea>
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-3 rounded-lg transition-all">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-gray-400 bg-slate-900/50">
+        © 2025 Bindhu Shree K B
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('loader-hidden');
+            }, 1500);
+        });
+
+        // Scroll Progress
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        });
+
+        // Resume Download
+        function downloadResume() {
+            window.open('https://drive.google.com/file/d/1piEosxgtqay7IbSU4ARi4kWfr56Nj_vT/view?usp=drive_link', '_blank');
+        }
+
+        // EmailJS Configuration
+        (function() {
+            emailjs.init('9M5k0soxRPOcbvaO4');
+        })();
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            emailjs.sendForm('service_cxjk1he', 'template_08ayufj', this)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Message sent successfully!');
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to send message: ' + error.text);
+                })
+                .finally(function() {
+                    submitBtn.textContent = 'Send Message';
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Skills Animation on Scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
